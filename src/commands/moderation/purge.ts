@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { CommandInteraction, Options, SlashCommandBuilder } from 'discord.js';
+import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { Command } from '../../interfaces/Command';
 
 export const purge: Command  = {

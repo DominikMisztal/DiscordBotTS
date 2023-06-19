@@ -11,13 +11,13 @@ export const minesweeper: Command  = {
 }
 
 function generateMinefield(){
-	var mineArray = generateArray(8);
+	let mineArray = generateArray(8);
 	mineArray = placeBombs(mineArray);
 	return arrayToString(mineArray);
 }
 
 function generateArray(size : number){
-	var array = new Array(size);
+	const array = new Array(size);
 	for (let i = 0; i < size; i++){
 		array[i] = new Array(size);
 		for (let j = 0; j< size; j++){
@@ -28,7 +28,7 @@ function generateArray(size : number){
 }
 
 function arrayToString(array : Array<Array<number>>){
-	var str = '';
+	let str = '';
 	for (let i = 0; i < array.length; i++){
 		for (let j = 0; j< array.length; j++){
 			if(array[i][j] == 9){
@@ -58,10 +58,10 @@ function arrayToString(array : Array<Array<number>>){
 }
 
 function placeBombs(array : Array<Array<number>>){
-	var bombsCount = Math.round((array.length * array[0].length) * 0.15);
-	var counter = 0;
-	var i = 0;
-	var j = 0;
+	const bombsCount = Math.round((array.length * array[0].length) * 0.15);
+	let counter = 0;
+	let i = 0;
+	let j = 0;
 	while(counter < bombsCount){
 		i = Math.floor(Math.random() * 8);
 		j = Math.floor(Math.random() * 8);
