@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client} from "discord.js";
 import { token } from "./config.json";
 import { onInteraction } from "./events/onInteraction";
 import { onReady } from "./events/onReady";

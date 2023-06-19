@@ -9,5 +9,6 @@ admin tools
 
 TODO:
 rewrite purge
-
+Change CommandInteraction to ChatInputCommandInteraction
+investigate context menu commands
 
