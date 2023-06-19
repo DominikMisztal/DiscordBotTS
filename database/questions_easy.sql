@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS easy_questions(
-    ID NOT NULL AUTO_INCREMENT,
+    ID int NOT NULL AUTO_INCREMENT,
     question varchar(255) NOT NULL,
     correct_answer varchar(255) NOT NULL,
     incorrect_answer_1 varchar(255) NOT NULL, 
@@ -27,8 +27,7 @@ INSERT INTO easy_questions(question, correct_answer, incorrect_answer_1, incorre
         "Liquid Snake",
         "Kulus Snake", 
         "Billy Snake", 
-        "Gilur Snake
-");
+        "Gilur Snake");
 
 INSERT INTO easy_questions(question, correct_answer, incorrect_answer_1, incorrect_answer_2, incorrect_answer_3) 
     values ("What vehicle in PUBG has the highest top speed?",

@@ -1,6 +1,6 @@
 FROM mysql:latest
 
-COPY /home/dominik/DiscordBotTS/database/questions_easy.sql /docker-entrypoint-initdb.d/questions_easy.sql
+COPY questions_easy.sql /docker-entrypoint-initdb.d/questions_easy.sql
 ENV MYSQL_ROOT_PASSWORD=admin123
 ENV MYSQL_DATABASE=quiz
 ENV MYSQL_USER=helpie
