@@ -23,7 +23,7 @@ export const question: Command  = {
             password: 'helpie123',
             database: 'quiz',
         });
-		const question : number = randomInt(5);
+		const question = 4;
 		const sqlQuery = "Select * From easy_questions where ID = " + question;
         database.connect();
 		const queryResult : string;
