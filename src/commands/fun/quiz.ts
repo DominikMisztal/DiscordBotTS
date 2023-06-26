@@ -8,40 +8,51 @@ import { randomInt } from 'crypto';
 export const question: Command  = {
 	data: new SlashCommandBuilder()
 		.setName('question')
-		.setDescription('Provides a quiz question')
-		.addStringOption((option) =>
-			option
-				.setName("difficulty")
-				.setDescription("How difficult should be the question")
-				.setRequired(true)),
+		.setDescription('Provides a quiz question'),
 	run: async(interaction: CommandInteraction) => {
-		const difficulty = +interaction.options.getString("amount", true);
-		let replyString : string;
 		const database = createConnection({
-            host:'localhost:3306',
+            host:'quiz',
             user: 'helpie',
             password: 'helpie123',
             database: 'quiz',
         });
-		const question = 4;
-		const sqlQuery = "Select * From easy_questions where ID = " + question;
-        database.connect();
-		const queryResult : string;
-        get_info(database, sqlQuery, function(result){
-			queryResult = result;
-		});
-		interaction.reply(queryResult);
+		const questionId = randomInt(5);
+		const sqlQuery = "Select * From easy_questions where ID = " + questionId;
+        await database.connect(function(err) {
+			if (err) throw err;
+			});
+		let question : string;
+		let correctAnswer : string;
+		let answers : Array<string> = [];
+		await database.query(sqlQuery, (err, results, fields) =>  {
+			question = results[0].question;
+			correctAnswer = results[0].correct_answer;
+			answers.push(results[0].correct_answer);
+			answers.push(results[0].incorrect_answer_1);
+			answers.push(results[0].incorrect_answer_2);
+			answers.push(results[0].incorrect_answer_3);
+			console.log(results[0]);
+			console.log(correctAnswer);
+			answers = shuffle(answers);
+			const replyString = question + "\nA: " +
+						answers[0] + "\nB: " +
+						answers[1] + "\nC: " +
+						answers[2] + "\nD: " +
+						answers[3] + "\nCorrect: " +
+						"||" + correctAnswer + "||";
+			interaction.reply(replyString);
+		})
+        
 	},
 };
 
-function get_info(database, sqlQuery, callback){
-      
-	database.query(sqlQuery, function(err, results){
-			if (err){ 
-			throw err;
-			}
-			console.log(results[0].objid);  
-
-			return callback(results[0].objid);
-  })
+function shuffle(a) {
+    let j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
