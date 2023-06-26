@@ -20,12 +20,13 @@ export const purge: Command  = {
 		} else if(amount <= 1){
 			replyString = "Too few messages, choose more than 1";
 		} else{
-			const messages = (await interaction.channel?.messages.fetch({ limit: amount }).filter(m => !m.pinned));
+			const messages = (await interaction.channel?.messages.fetch({ limit: amount }));
+			console.log(messages);
 			try {
-				await interaction.channel?.bulkDelete(messages);
+				await interaction.channel!.bulkDelete(messages.filter(m => !m.pinned));
 				replyString = "Deleted messages";
 			} catch (error) {
-				replyString = "Issue when clearing messages.";
+				replyString = "You are trying to delete more messages than there are present or the messages are too old";
 			}
 			
 		}
